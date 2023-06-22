@@ -13,6 +13,80 @@ declare module "phaser3-merged-input" {
 		| "S"
 		| "SW";
 	export interface Player {
+		interaction: {
+			buffer: string[];
+			device: string;
+			pressed: string[];
+			isPressed: (buttons: string[]) => boolean;
+			released: string[];
+			isReleased: (buttons: string[]) => boolean;
+			lastPressed: string;
+			lastReleased: string;
+		};
+
+		interaction_mapped: {
+			buffer: string[];
+			device: string;
+			pressed: string[];
+			isPressed: (buttons: string[]) => boolean;
+			released: string[];
+			isReleased: (buttons: string[]) => boolean;
+			lastPressed: string;
+			lastReleased: string;
+		};
+
+		buttons: {
+			B1: 0 | 1;
+			B2: 0 | 1;
+			B3: 0 | 1;
+			B4: 0 | 1;
+			B5: 0 | 1;
+			B6: 0 | 1;
+			B7: 0 | 1;
+			B8: 0 | 1;
+			B9: 0 | 1;
+			B10: 0 | 1;
+			B11: 0 | 1;
+			B12: 0 | 1;
+			B13: 0 | 1;
+			B14: 0 | 1;
+			B15: 0 | 1;
+			B16: 0 | 1;
+		};
+
+		buttons_mapped: {
+			START: 0 | 1;
+			SELECT: 0 | 1;
+			UP: 0 | 1;
+			DOWN: 0 | 1;
+			LEFT: 0 | 1;
+			RIGHT: 0 | 1;
+			RC_N: 0 | 1;
+			RC_E: 0 | 1;
+			RC_S: 0 | 1;
+			RC_W: 0 | 1;
+			LC_N: 0 | 1;
+			LC_E: 0 | 1;
+			LC_S: 0 | 1;
+			LC_W: 0 | 1;
+			LB: 0 | 1;
+			RB: 0 | 1;
+			LT: 0 | 1;
+			RT: 0 | 1;
+		};
+
+		pointer: {
+			M1: 0 | 1;
+			M2: 0 | 1;
+			M3: 0 | 1;
+			M4: 0 | 1;
+			M5: 0 | 1;
+			BEARING: Bearing;
+			BEARING_DEGREES: number;
+			ANGLE: number;
+			TIMESTAMP: number;
+		};
+
 		direction: {
 			UP: 0 | 1;
 			DOWN: 0 | 1;
@@ -37,53 +111,6 @@ declare module "phaser3-merged-input" {
 			TIMESTAMP: number;
 		};
 
-		buttons: {
-			B1: 0 | 1;
-			B2: 0 | 1;
-			B3: 0 | 1;
-			B4: 0 | 1;
-			B5: 0 | 1;
-			B6: 0 | 1;
-			B7: 0 | 1;
-			B8: 0 | 1;
-			B9: 0 | 1;
-			B10: 0 | 1;
-			B11: 0 | 1;
-			B12: 0 | 1;
-			B13: 0 | 1;
-			B14: 0 | 1;
-			B15: 0 | 1;
-			B16: 0 | 1;
-		};
-
-		pointer: {
-			M1: 0 | 1;
-			M2: 0 | 1;
-			M3: 0 | 1;
-			M4: 0 | 1;
-			M5: 0 | 1;
-			BEARING: Bearing;
-			BEARING_DEGREES: number;
-			ANGLE: number;
-			TIMESTAMP: number;
-		};
-
-		position: {};
-		interaction: {
-			buffer: string[];
-			device: string;
-			pressed: string[];
-			released: string[];
-			lastPressed: string;
-			lastReleased: string;
-		};
-		interaction_mapped: {
-			isPressed: (button: string | string[]) => boolean;
-		};
-		gamepad: {
-			id: number;
-			index: number;
-		};
 		keys: {
 			UP: [];
 			DOWN: [];
@@ -106,12 +133,9 @@ declare module "phaser3-merged-input" {
 			B15: [];
 			B16: [];
 		};
-		setPosition: (x: number, y: number) => void;
-		internal: {
-			fakedpadBuffer: string[];
-			fakedpadPressed: string[];
-			fakedpadReleased: string[];
-		};
+
+		// 'position': {};
+		// 'gamepad': {};
 	}
 
 	export default class MergedInput {
@@ -183,7 +207,7 @@ declare module "phaser3-merged-input" {
 		 */
 		getPlayer(index: number): any;
 		getPlayerIndexFromKey(key: any): any;
-		getPlayerButtonFromKey(key): any;
+		getPlayerButtonFromKey(key: any): any;
 		/**
 		 * Returns a struct to hold input control information
 		 * Set up a struct for each player in the game
